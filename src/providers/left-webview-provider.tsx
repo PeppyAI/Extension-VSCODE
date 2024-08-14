@@ -52,6 +52,9 @@ export class LeftPanelWebview implements WebviewViewProvider {
 		const styleUri = webview.asWebviewUri(
 			Uri.joinPath(this.extensionPath, "script", "left-webview-provider.css")
 		);
+		const buttonStyleUri = webview.asWebviewUri(
+			Uri.joinPath(this.extensionPath, "script", "button.css")
+		);
 		// Use a nonce to only allow a specific script to be run.
 		const nonce = Utils.getNonce();
 
@@ -69,14 +72,10 @@ export class LeftPanelWebview implements WebviewViewProvider {
 
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <link href="${styleUri}" rel="stylesheet">
+					<link href="${buttonStyleUri}" rel="stylesheet">
 
                 </head>
                 <body>
-
-				<div style="text-align:center;color: white;">
-					Hello To Code Generation
-				</div>
-			
 				
                     ${ReactDOMServer.renderToString((
 			<LeftPanel message={"Left Panel Webview in VSCode extension"}></LeftPanel>

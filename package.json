@@ -31,7 +31,7 @@
       "activitybar": [
         {
           "id": "webview",
-          "title": "WebView for sidepanel",
+          "title": "Code Generation",
           "icon": "./media/icon.svg"
         }
       ]
