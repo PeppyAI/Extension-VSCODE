@@ -3,16 +3,16 @@ try {
 } catch (e) {
 	console.log("module-alias import error !");
 }
+
 import * as vscode from "vscode";
 import { EXTENSION_CONSTANT } from "constant";
 import { LeftPanelWebview } from "providers/left-webview-provider";
 import { ProgressLocation, window } from "vscode";
 import { makeSuggestion } from "./codeGeneration/generateSuggestion";
-
+import { InlineCompletionProvider } from './InlineCompletionProvider';
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand('codegen.helloWorld', async function () {
-		// The code you place here will be executed every time your command is executed
 		let output = await window.withProgress(
 			{
 				location: ProgressLocation.Notification,
@@ -32,7 +32,10 @@ export function activate(context: vscode.ExtensionContext) {
 		leftPanelWebViewProvider,
 	);
 	context.subscriptions.push(view);
-};
 
-// this method is called when your extension is deactivated
+	// Register inline completion provider
+	const provider = new InlineCompletionProvider();
+	vscode.languages.registerInlineCompletionItemProvider({ pattern: '**' }, provider);
+}
+
 export function deactivate() { }

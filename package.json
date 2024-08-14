@@ -1,22 +1,31 @@
 {
   "name": "codegen",
   "displayName": "codegen",
-  "description": "Example of create webview",
+  "description": "Example of create webview with inline completion",
   "publisher": "CodeGen",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
-    "vscode": "^1.64.0"
+    "vscode": "^1.67.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./dist/extension.js",
+  "enabledApiProposals": [
+    "inlineCompletionsAdditions"
+  ],
   "contributes": {
     "commands": [
       {
         "command": "codegen.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "extension.inline-completion-settings",
+        "title": "My Inline Completion Demo Settings"
       }
     ],
     "keybindings": [
@@ -45,6 +54,13 @@
           "icon": "src/media/icon.svg"
         }
       ]
+    },
+    "menus": {
+      "editor/inlineCompletions/actions": [
+        {
+          "command": "extension.inline-completion-settings"
+        }
+      ]
     }
   },
   "scripts": {
@@ -52,21 +68,24 @@
     "watch": "tsc -watch -p ./ && npm run compile",
     "vscode:package": "vsce package",
     "webpack": "rm -rf ./dist/* && webpack --mode development",
-    "package": "rm -rf *.vsix && npm run webpack && vsce package"
+    "package": "rm -rf *.vsix && npm run webpack && vsce package",
+    "download-api": "dts dev",
+    "postinstall": "npm run download-api"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.0",
-    "@types/node": "14.x",
-    "@types/vscode": "^1.64.0",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
-    "@typescript-eslint/parser": "^5.12.1",
+    "@types/node": "^18",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.0",
+    "@typescript-eslint/parser": "^7.14.0",
+    "@vscode/dts": "^0.4.1",
     "@vscode/test-electron": "^2.1.2",
-    "eslint": "^8.9.0",
+    "eslint": "^8.26.0",
     "glob": "^7.2.0",
     "mocha": "^9.2.1",
     "ts-loader": "^9.2.6",
-    "typescript": "^4.5.5",
+    "typescript": "^5.5.2",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2"
   },
@@ -76,7 +95,8 @@
     "module-alias": "^2.2.2",
     "path": "^0.12.7",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "tslib": "^2.6.3"
   },
   "_moduleAliases": {
     "utils": "dist/utils",
