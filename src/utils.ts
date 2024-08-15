@@ -1,3 +1,5 @@
+import * as winston from 'winston';
+
 function getNonce() {
     let text = '';
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -10,3 +12,10 @@ function getNonce() {
 export const Utils = {
     getNonce,
 };
+
+// Configuring the logging via winston
+export const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    transports: [new winston.transports.Console()],
+});

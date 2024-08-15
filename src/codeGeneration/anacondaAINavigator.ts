@@ -1,7 +1,7 @@
 import { ANACONDA_BASE_URL } from "../constant";
 import axios from 'axios';
 
-async function getServerHealth() {
+export async function getServerHealth() {
     try {
         const response = await axios.get(`${ANACONDA_BASE_URL}/health`);
         if (response.status === 200) {
@@ -15,7 +15,7 @@ async function getServerHealth() {
 }
 
 
-async function postCompletion(context, userInput) {
+export async function postCompletion(context, userInput) {
     const prompt = `${context}\nUser: ${userInput}\nAssistant:`;
     // const prompt = context;
     const data = {

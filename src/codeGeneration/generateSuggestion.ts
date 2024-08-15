@@ -1,9 +1,26 @@
-export async function makeSuggestion() {
-    // This request needs to be rerouted to appropriate channel
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Time over for 5 sec");
-            resolve("Dummy Text");
-        }, 5000);
-    });
+import * as vscode from 'vscode';
+import { postCompletion } from './anacondaAINavigator';
+import { logger } from '../utils';
+
+
+export async function makeSuggestion(token: vscode.CancellationToken, content: string): Promise<string> {
+    // Periodically check for cancellation
+    if (token.isCancellationRequested) {
+        throw new vscode.CancellationError();
+    }
+    // Generating the remaining code via Anaconda Navigator
+    // Getting the comment line out of the same
+    let context = null;
+    let userprompt = null;
+    if (content.lastIndexOf("\n") > 0) {
+        context = content.substring(0, content.lastIndexOf("\n"));
+        userprompt = content.substring(content.lastIndexOf("\n"));
+    } else {
+        context = content;
+        userprompt = "";
+    }
+
+    logger.info(context);
+    logger.info(userprompt);
+    return "\n" + await postCompletion(context, userprompt);
 }
