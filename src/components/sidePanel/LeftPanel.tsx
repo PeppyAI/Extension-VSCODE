@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import Button from 'components/sidePanel/Button';
+import Button from './Button';
 
 interface LeftPanelProp {
     message: string

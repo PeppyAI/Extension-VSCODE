@@ -1,6 +1,6 @@
 import { WebviewViewProvider, WebviewView, Webview, Uri, EventEmitter, window } from "vscode";
-import { Utils } from "utils";
-import LeftPanel from 'components/sidePanel/LeftPanel';
+import { Utils } from "../utils";
+import LeftPanel from '../components/sidePanel/LeftPanel';
 import * as ReactDOMServer from "react-dom/server";
 
 export class LeftPanelWebview implements WebviewViewProvider {

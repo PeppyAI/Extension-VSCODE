@@ -9,4 +9,4 @@ export const EXTENSION_CONSTANT = {
     ELEMENT_IDS
 };
 
-export const ANACONDA_BASE_URL = "http://localhost:8080";
+export const ANACONDA_BASE_URL = "http://localhost:5000";

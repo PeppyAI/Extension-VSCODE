@@ -2,21 +2,31 @@ import * as vscode from 'vscode';
 import { Range } from 'vscode';
 
 export class InlineCompletionProvider implements vscode.InlineCompletionItemProvider {
+    private suggestion: string | null = null;
+
+    triggerCompletion(suggestion: string) {
+        this.suggestion = suggestion;
+        vscode.commands.executeCommand('editor.action.inlineSuggest.trigger');
+    }
+
     async provideInlineCompletionItems(document: vscode.TextDocument, position: vscode.Position, context: vscode.InlineCompletionContext, token: vscode.CancellationToken): Promise<vscode.InlineCompletionList> {
         console.log('provideInlineCompletionItems triggered');
-
         const result: vscode.InlineCompletionList = {
             items: [],
             commands: [],
         };
 
-        // Always add "Here is the output" as an inline completion item
-        const snippet = new vscode.SnippetString("Here is the output");
-        result.items.push({
-            insertText: snippet,
-            range: new Range(position.line, position.character, position.line, position.character),
-            completeBracketPairs: false,
-        });
+        if (this.suggestion) {
+            const snippet = new vscode.SnippetString(this.suggestion);
+            result.items.push({
+                insertText: snippet,
+                range: new Range(position.line, position.character, position.line, position.character),
+                completeBracketPairs: false,
+            });
+
+            // Reset the suggestion after providing it
+            this.suggestion = null;
+        }
 
         if (result.items.length > 0) {
             result.commands!.push({
@@ -25,6 +35,7 @@ export class InlineCompletionProvider implements vscode.InlineCompletionItemProv
                 arguments: [1, 2],
             });
         }
+
         return result;
     }
 
