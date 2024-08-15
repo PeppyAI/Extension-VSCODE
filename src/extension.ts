@@ -9,7 +9,7 @@ import { EXTENSION_CONSTANT } from "constant";
 import { LeftPanelWebview } from "providers/left-webview-provider";
 import { ProgressLocation, window } from "vscode";
 import { makeSuggestion } from "./codeGeneration/generateSuggestion";
-import { InlineCompletionProvider } from './InlineCompletionProvider';
+import { InlineCompletionProvider } from './editor/InlineCompletionProvider';
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand('codegen.helloWorld', async function () {
