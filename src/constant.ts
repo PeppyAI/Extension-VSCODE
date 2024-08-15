@@ -8,3 +8,5 @@ export const EXTENSION_CONSTANT = {
     LEFT_PANEL_WEBVIEW_ID,
     ELEMENT_IDS
 };
+
+export const ANACONDA_BASE_URL = "http://localhost:8080";
