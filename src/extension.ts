@@ -10,6 +10,14 @@ import { LeftPanelWebview } from "providers/left-webview-provider";
 import { ProgressLocation, window } from "vscode";
 import { makeSuggestion } from "./codeGeneration/generateSuggestion";
 import { InlineCompletionProvider } from './editor/InlineCompletionProvider';
+import * as winston from 'winston';
+
+// Configuring the logging via winston
+const logger = winston.createLogger({
+	level: 'info',
+	format: winston.format.json(),
+	transports: [new winston.transports.Console()],
+});
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand('codegen.helloWorld', async function () {
