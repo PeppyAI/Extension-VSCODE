@@ -10,3 +10,4 @@ export const EXTENSION_CONSTANT = {
 };
 
 export const ANACONDA_BASE_URL = "http://localhost:5000";
+export const OLLAMA_BASE_URL = "http://localhost:11434";
