@@ -1,7 +1,7 @@
 {
   "name": "codegen",
   "displayName": "codegen",
-  "description": "Example of create webview with inline completion",
+  "description": "A code completion platform",
   "publisher": "CodeGen",
   "version": "0.0.3",
   "engines": {

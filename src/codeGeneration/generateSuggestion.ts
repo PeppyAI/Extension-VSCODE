@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { postCompletion } from './anacondaAINavigator';
+// import { postCompletion } from './anacondaAINavigator';
+import { postCompletion } from './ollama';
 import { logger } from '../utils';
 
 
