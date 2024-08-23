@@ -41,19 +41,9 @@ export class LeftPanelWebview implements WebviewViewProvider {
 
 	private _getHtmlForWebview(webview: Webview) {
 		// Get the local path to main script run in the webview, then convert it to a uri we can use in the webview.
-		// Script to handle user action
-		const scriptUri = webview.asWebviewUri(
-			Uri.joinPath(this.extensionPath, "script", "left-webview-provider.js")
-		);
-		const constantUri = webview.asWebviewUri(
-			Uri.joinPath(this.extensionPath, "script", "constant.js")
-		);
 		// CSS file to handle styling
 		const styleUri = webview.asWebviewUri(
 			Uri.joinPath(this.extensionPath, "script", "left-webview-provider.css")
-		);
-		const buttonStyleUri = webview.asWebviewUri(
-			Uri.joinPath(this.extensionPath, "script", "button.css")
 		);
 		// Use a nonce to only allow a specific script to be run.
 		const nonce = Utils.getNonce();
@@ -69,21 +59,18 @@ export class LeftPanelWebview implements WebviewViewProvider {
                             script-src 'nonce-${nonce}'
 							
 							;">             
-
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <link href="${styleUri}" rel="stylesheet">
-					<link href="${buttonStyleUri}" rel="stylesheet">
 
                 </head>
                 <body>
 				
                     ${ReactDOMServer.renderToString((
-			<LeftPanel message={"Left Panel Webview in VSCode extension"}></LeftPanel>
+			<LeftPanel message={"Welcome to PeppyAI"}></LeftPanel>
 		))
 			}
-					<script nonce="${nonce}" type="text/javascript" src="${constantUri}"></script>
-					<script nonce="${nonce}" src="${scriptUri}"></script>
 				</body>
             </html>`;
 	}
 }
+// <script nonce="${nonce}" type="text/javascript" src="${constantUri}"></script>

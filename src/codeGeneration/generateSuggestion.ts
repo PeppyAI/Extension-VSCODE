@@ -23,5 +23,5 @@ export async function makeSuggestion(token: vscode.CancellationToken, content: s
 
     logger.info(context);
     logger.info(userprompt);
-    return "\n" + await postCompletion(context, userprompt);
+    return await postCompletion(context, userprompt);
 }
