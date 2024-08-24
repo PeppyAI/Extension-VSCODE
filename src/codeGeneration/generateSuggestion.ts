@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
-// import { postCompletion } from './anacondaAINavigator';
-import { postCompletion } from './ollama';
-import { logger } from '../utils';
+import { postCompletionAnaconda } from './anacondaAINavigator';
+import { postCompletionOllama } from './ollama';
+import { apiDetails } from "../constant";
+import { outputChannel } from '../utils';
 
 
 export async function makeSuggestion(token: vscode.CancellationToken, content: string): Promise<string> {
@@ -9,7 +10,6 @@ export async function makeSuggestion(token: vscode.CancellationToken, content: s
     if (token.isCancellationRequested) {
         throw new vscode.CancellationError();
     }
-    // Generating the remaining code via Anaconda Navigator
     // Getting the comment line out of the same
     let context = null;
     let userprompt = null;
@@ -21,7 +21,15 @@ export async function makeSuggestion(token: vscode.CancellationToken, content: s
         userprompt = "";
     }
 
-    logger.info(context);
-    logger.info(userprompt);
-    return "\n" + await postCompletion(context, userprompt);
+    let provider = apiDetails.getProvider();
+    let url = apiDetails.getIP() + ":" + apiDetails.getPort();
+
+    if (provider === "ollama") {
+        outputChannel.appendLine("Ollama is called");
+        return await postCompletionOllama(context, userprompt, url);
+    }
+    else if (provider === "anaconda") {
+        outputChannel.appendLine("Anaconda is called");
+        return await postCompletionAnaconda(context, userprompt, url);
+    }
 }

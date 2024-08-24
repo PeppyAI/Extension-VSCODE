@@ -1,8 +1,8 @@
 {
-  "name": "codegen",
-  "displayName": "codegen",
+  "name": "Peppy",
+  "displayName": "PeppyAI",
   "description": "A code completion platform",
-  "publisher": "CodeGen",
+  "publisher": "PeppyAI",
   "version": "0.0.3",
   "engines": {
     "vscode": "^1.67.0"
@@ -18,7 +18,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "codegen.helloWorld",
+        "command": "Peppy.shortcut",
         "title": "Hello World"
       },
       {
@@ -28,7 +28,7 @@
     ],
     "keybindings": [
       {
-        "command": "codegen.helloWorld",
+        "command": "Peppy.shortcut",
         "key": "ctrl+shift+space",
         "mac": "cmd+shift+space",
         "when": "editorTextFocus"

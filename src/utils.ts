@@ -1,4 +1,5 @@
 import * as winston from 'winston';
+import { window } from "vscode";
 
 function getNonce() {
     let text = '';
@@ -19,3 +20,7 @@ export const logger = winston.createLogger({
     format: winston.format.json(),
     transports: [new winston.transports.Console()],
 });
+
+// Configuring the messages to Seperate Output Channel
+
+export const outputChannel = window.createOutputChannel("Peppy AI");

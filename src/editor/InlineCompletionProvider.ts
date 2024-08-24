@@ -1,3 +1,4 @@
+import { logger } from '../utils';
 import * as vscode from 'vscode';
 import { Range } from 'vscode';
 
@@ -10,7 +11,7 @@ export class InlineCompletionProvider implements vscode.InlineCompletionItemProv
     }
 
     async provideInlineCompletionItems(document: vscode.TextDocument, position: vscode.Position, context: vscode.InlineCompletionContext, token: vscode.CancellationToken): Promise<vscode.InlineCompletionList> {
-        console.log('provideInlineCompletionItems triggered');
+        logger.info('provideInlineCompletionItems triggered');
         const result: vscode.InlineCompletionList = {
             items: [],
             commands: [],
@@ -40,10 +41,10 @@ export class InlineCompletionProvider implements vscode.InlineCompletionItemProv
     }
 
     handleDidShowCompletionItem(completionItem: vscode.InlineCompletionItem): void {
-        console.log('handleDidShowCompletionItem');
+        logger.info('handleDidShowCompletionItem');
     }
 
     handleDidPartiallyAcceptCompletionItem(completionItem: vscode.InlineCompletionItem, info: vscode.PartialAcceptInfo | number): void {
-        console.log('handleDidPartiallyAcceptCompletionItem', completionItem, info);
+        logger.info('handleDidPartiallyAcceptCompletionItem', completionItem, info);
     }
 }
