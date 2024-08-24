@@ -1,8 +1,6 @@
-import { OLLAMA_BASE_URL } from "../constant";
 import axios from 'axios';
-import { logger } from '../utils';
 
-export async function postCompletion(context, userInput) {
+export async function postCompletionOllama(context, userInput, url) {
     const prompt = `${context}\n${userInput}\n`;
     const data = {
         "prompt": prompt,
@@ -19,16 +17,13 @@ export async function postCompletion(context, userInput) {
     const headers = { 'Content-Type': 'application/json' };
 
     try {
-        logger.info("Triggering the post request")
-        const response = await axios.post(`${OLLAMA_BASE_URL}/api/generate`, data, { headers: headers });
+        const response = await axios.post(`${url}/api/generate`, data, { headers: headers });
         if (response.status === 200) {
-            // logger.info(response.data.response)
             return response.data.response;
         } else {
             return "Error processing your request. Please try again.";
         }
     } catch (error) {
-        logger.error(error);
         return "Error processing your request. Please try again.";
     }
 }

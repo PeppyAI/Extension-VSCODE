@@ -2,6 +2,8 @@ import { WebviewViewProvider, WebviewView, Webview, Uri, EventEmitter, window } 
 import { Utils } from "../utils";
 import LeftPanel from '../components/sidePanel/LeftPanel';
 import * as ReactDOMServer from "react-dom/server";
+import { outputChannel } from "../utils";
+import { apiDetails } from "../constant";
 
 export class LeftPanelWebview implements WebviewViewProvider {
 	constructor(
@@ -33,6 +35,12 @@ export class LeftPanelWebview implements WebviewViewProvider {
 				case 'SHOW_WARNING_LOG':
 					window.showWarningMessage(message.data.message);
 					break;
+				case 'UPDATE_SETTINGS':
+					// Handle the updated settings here
+					apiDetails.setIP(message.data.serverUrl);
+					apiDetails.setPort(message.data.portNumber);
+					apiDetails.setProvider(message.data.modelProvider);
+					break;
 				default:
 					break;
 			}
@@ -41,6 +49,9 @@ export class LeftPanelWebview implements WebviewViewProvider {
 
 	private _getHtmlForWebview(webview: Webview) {
 		// Get the local path to main script run in the webview, then convert it to a uri we can use in the webview.
+		const jsUri = webview.asWebviewUri(
+			Uri.joinPath(this.extensionPath, "script", "left-webview-panel.js")
+		);
 		// CSS file to handle styling
 		const styleUri = webview.asWebviewUri(
 			Uri.joinPath(this.extensionPath, "script", "left-webview-provider.css")
@@ -70,7 +81,7 @@ export class LeftPanelWebview implements WebviewViewProvider {
 		))
 			}
 				</body>
+				<script nonce="${nonce}" type="text/javascript" src="${jsUri}"></script>
             </html>`;
 	}
 }
-// <script nonce="${nonce}" type="text/javascript" src="${constantUri}"></script>

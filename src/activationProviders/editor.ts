@@ -2,6 +2,7 @@ import { currentToken } from "./utils";
 import { CancellationTokenSource, window, ProgressLocation, CancellationError } from "vscode";
 import { makeSuggestion } from "../codeGeneration/generateSuggestion";
 import { inlineProvider } from "./utils";
+import { outputChannel } from "../utils";
 
 // Cancel any ongoing suggestion generation
 let currentCancellationTokenSource = currentToken();
@@ -47,9 +48,9 @@ async function editor() {
         }
     } catch (error) {
         if (error instanceof CancellationError) {
-            console.log('Suggestion generation was cancelled');
+            outputChannel.appendLine('Suggestion generation was cancelled');
         } else {
-            console.error('An error occurred during suggestion generation:', error);
+            outputChannel.appendLine('An error occurred during suggestion generation:' + error);
         }
     } finally {
         currentCancellationTokenSource = null;

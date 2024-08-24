@@ -1,3 +1,5 @@
+/* General Panel Properties */
+
 .panel-wrapper {
     display: flex;
     flex-direction: column;
@@ -39,4 +41,62 @@ button {
 button:hover {
     background-color: #005a9e;
     /* Darker shade of blue for hover */
+}
+
+/* Defining the input box styles */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+label {
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: var(--vscode-foreground);
+}
+
+input[type="text"],
+input[type="number"] {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    padding: 4px 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    border-radius: 2px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--vscode-focusBorder);
+}
+
+/* Defining the VSCode select button styles */
+.vscode-select {
+    background-color: var(--vscode-dropdown-background);
+    color: var(--vscode-dropdown-foreground);
+    border: 1px solid var(--vscode-dropdown-border);
+    padding: 4px 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    border-radius: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M10.293%203.293L6%207.586%201.707%203.293A1%201%200%20012.414%202h7.172a1%201%200%2001.707%201.293z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 30px;
+}
+
+.vscode-select:focus {
+    outline: none;
+    border-color: var(--vscode-focusBorder);
+}
+
+.vscode-select option {
+    background-color: var(--vscode-dropdown-listBackground);
+    color: var(--vscode-dropdown-foreground);
 }
