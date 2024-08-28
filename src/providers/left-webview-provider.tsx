@@ -2,8 +2,8 @@ import { WebviewViewProvider, WebviewView, Webview, Uri, EventEmitter, window } 
 import { Utils } from "../utils";
 import LeftPanel from '../components/sidePanel/LeftPanel';
 import * as ReactDOMServer from "react-dom/server";
-import { outputChannel } from "../utils";
 import { apiDetails } from "../constant";
+import { commands } from "vscode";
 
 export class LeftPanelWebview implements WebviewViewProvider {
 	constructor(
@@ -41,6 +41,9 @@ export class LeftPanelWebview implements WebviewViewProvider {
 					apiDetails.setPort(message.data.portNumber);
 					apiDetails.setProvider(message.data.modelProvider);
 					break;
+				case 'TRIGGER_CODE_COMPLETION':
+					commands.executeCommand('Peppy.shortcut');
+					break;
 				default:
 					break;
 			}
@@ -49,8 +52,14 @@ export class LeftPanelWebview implements WebviewViewProvider {
 
 	private _getHtmlForWebview(webview: Webview) {
 		// Get the local path to main script run in the webview, then convert it to a uri we can use in the webview.
+		const constantUri = webview.asWebviewUri(
+			Uri.joinPath(this.extensionPath, "script", "constants.js")
+		);
 		const jsUri = webview.asWebviewUri(
 			Uri.joinPath(this.extensionPath, "script", "left-webview-panel.js")
+		);
+		const completionButtonUri = webview.asWebviewUri(
+			Uri.joinPath(this.extensionPath, "script", "webview-completion-button.js")
 		);
 		// CSS file to handle styling
 		const styleUri = webview.asWebviewUri(
@@ -81,7 +90,9 @@ export class LeftPanelWebview implements WebviewViewProvider {
 		))
 			}
 				</body>
+				<script nonce="${nonce}" type="text/javascript" src="${constantUri}"></script>
 				<script nonce="${nonce}" type="text/javascript" src="${jsUri}"></script>
+				<script nonce="${nonce}" type="text/javascript" src="${completionButtonUri}"></script>
             </html>`;
 	}
 }
