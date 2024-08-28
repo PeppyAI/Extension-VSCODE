@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const vscode = acquireVsCodeApi();
     const serverUrlInput = document.getElementById('serverUrl');
     const portNumberInput = document.getElementById('portNumber');
     const modelProvider = document.getElementById('modelSelect');

@@ -1,7 +1,7 @@
 const LEFT_PANEL_WEBVIEW_ID = 'left-panel-webview';
 
 const ELEMENT_IDS = {
-    TRIGGER_MESSAGE_BUTTON: 'trigger-show-message-button'
+    TRIGGER_COMPLETION_BUTTON: 'trigger-completion-button'
 };
 
 export const EXTENSION_CONSTANT = {
